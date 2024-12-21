@@ -7,17 +7,15 @@ from train import train
 from test import test
 
 
-def main():
-    # 하이퍼파라미터 설정
+def main(hidden_channels,
+         kernel_size,
+         num_layers,
+         batch_size,
+         num_epochs,
+         frame_count,
+         learning_rate):
+    num_classes = 6,  # 분류할 동작 클래스 수
     input_channels = 1  # MHI는 그레이스케일
-    hidden_channels = 32
-    kernel_size = 3
-    num_layers = 2
-    num_classes = 6  # 분류할 동작 클래스 수
-    batch_size = 4
-    num_epochs = 100
-    frame_count = 50
-    learning_rate = 0.001
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
@@ -51,4 +49,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(
+        hidden_channels=32,
+        kernel_size=3,
+        num_layers=2,
+        batch_size=4,
+        num_epochs=100,
+        frame_count=50,
+        learning_rate=0.001
+    )
