@@ -7,20 +7,21 @@ from train import train
 from test import test
 
 
-def main(hidden_channels,
+def main(dataset_dir,
+         hidden_channels,
          kernel_size,
          num_layers,
          batch_size,
          num_epochs,
          frame_count,
          learning_rate):
-    num_classes = 6,  # 분류할 동작 클래스 수
+    num_classes = 6  # 분류할 동작 클래스 수
     input_channels = 1  # MHI는 그레이스케일
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # 데이터셋 로드
-    train_loader, test_loader = get_dataloader(root_dir='dataset', batch_size=batch_size, frame_count=frame_count)
+    train_loader, test_loader = get_dataloader(root_dir=dataset_dir, batch_size=batch_size, frame_count=frame_count)
     
     # 첫 번째 배치로부터 입력 크기 얻기
     sample_data, *_ = next(iter(train_loader))
@@ -56,5 +57,6 @@ if __name__ == "__main__":
         batch_size=4,
         num_epochs=100,
         frame_count=50,
-        learning_rate=0.001
+        learning_rate=0.001,
+        dataset_dir='dataset'
     )
